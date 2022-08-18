@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService, ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
+import { GoodsModule } from './goods/goods.module';
 import envConfig from '../config/env';
 
 @Module({
@@ -28,7 +31,15 @@ import envConfig from '../config/env';
         synchronize: !(process.env.NODE_ENV === 'production'), //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+      sortSchema: true,
+      debug: false,
+      playground: true,
+    }),
     PostsModule,
+    GoodsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
