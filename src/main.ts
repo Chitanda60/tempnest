@@ -6,11 +6,14 @@ import { HttpExceptionFilter } from './core/filter/http-exception.filter';
 import { TransformInterceptor } from './core/interceptor/transform.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn'],
+  });
 
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
+  // NOTE: 使用graphql时注意
   app.useGlobalInterceptors(new TransformInterceptor());
 
   const config = new DocumentBuilder()
