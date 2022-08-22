@@ -10,11 +10,12 @@ export class GoodsService {
     public readonly goodsRepository: Repository<GoodsEntity>,
   ) {}
 
-  public findAll() {
-    return this.goodsRepository.find();
+  public async findAll() {
+    const data = await this.goodsRepository.find();
+    return data;
   }
 
-  public findOneById(id) {
+  public findOneById(id: any) {
     return this.goodsRepository.findOne(id);
   }
 

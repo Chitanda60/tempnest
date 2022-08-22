@@ -16,7 +16,6 @@ export class GoodsTypeGraphql {
 
 @InputType()
 export class GoodsInsertTypeGraphql {
-  @Field()
   readonly name: string;
 
   readonly price?: number;

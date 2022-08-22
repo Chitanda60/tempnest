@@ -29,7 +29,7 @@ import envConfig from '../config/env';
         password: configService.get('DB_PASSWORD', 'zx86880326'), // 密码
         database: configService.get('DB_DATABASE', 'zxsql'), //数据库名
         timezone: '+08:00', //服务器上配置的时区
-        synchronize: !(process.env.NODE_ENV === 'production'), //根据实体自动创建数据库表， 生产环境建议关闭
+        synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
